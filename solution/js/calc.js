@@ -1,16 +1,29 @@
 /* START OF STARTER CODE: You should not need to modify these functions. */
-function exponent(base, power) {
-  var ans = 1;
-
-  for (var i = 0; i < power; i++) {
-    ans *= base;
-  }
-
-  return ans;
-}
-
 function calculate(operation, value1, value2) {
-  return operation(value1, value2);
+  switch (operation) {
+    case '+':
+      return value1 + value2;
+      // Notice that we don't have break statements because
+      // return will already break for us.
+
+    case '-':
+      return value1 - value2;
+
+    case '*':
+      return value1 * value2;
+
+    case '/':
+      return value1 / value2;
+
+    case '%':
+      return value1 % value2;
+
+    case '^':
+      return exponent(value1, value2);
+    
+    default:
+      return false;
+  }  
 }
 
 function add(a, b) {
@@ -32,6 +45,10 @@ function div(a, b) {
 function mod(a, b) {
   return a % b;
 }
+
+function exponent(a, b) {
+  return Math.pow(a, b);
+}
 /* END OF STARTER CODE */
 
 /* Calculator Logic */
@@ -40,15 +57,16 @@ var curValue1 = 0;
 var curValue2 = false;
 var decimalPlace = 0;
 var curOperation = false;
-var curOperationFunction = false;
 var hasDecimalBeenPressed = false;
 
 function updateDisplay(value) {
-  // var valueString = value.toPrecision(10);
   var valueString = value.toString();
-  var numDigitsOneEm = 30;
+
+  /* SOLUTION */
   // Update the fontsize to fit exactly the number of digits.
+  var numDigitsOneEm = 30;
   document.getElementById("result").style.fontSize = Math.min(3.5, numDigitsOneEm / valueString.length - 0.3) + "em";
+  /* END SOLUTION */
 
   // Display the value.
   document.getElementById("result").value = valueString;
@@ -96,22 +114,7 @@ function setOperation(op) {
     return;
   }
 
-  var validOps = {
-    "+": add,
-    "-": sub,
-    "*": mult,
-    "/": div,
-    "%": mod,
-    "^": exponent
-  };
-
-  if (!(op in validOps)) {
-    console.log('bad')
-    return;
-  }
-
   curOperation = op;
-  curOperationFunction = validOps[op];
 }
 
 function compute() {
@@ -119,11 +122,13 @@ function compute() {
     return;
   }
 
-  result = calculate(curOperationFunction, curValue1, curValue2)
-  curValue1 = 0;
-  curValue2 = false;
-  curOperation = false;
-  updateDisplay(result);
+  result = calculate(curOperation, curValue1, curValue2)
+  if (result !== false) {
+    curValue1 = 0;
+    curValue2 = false;
+    curOperation = false;
+    updateDisplay(result);
+  }
 }
 
 function flipSign() {
