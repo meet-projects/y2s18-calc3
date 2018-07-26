@@ -19,35 +19,11 @@ function calculate(operation, value1, value2) {
       return value1 % value2;
 
     case '^':
-      return exponent(value1, value2);
+      return Math.pow(value1, value2);
     
     default:
       return false;
   }  
-}
-
-function add(a, b) {
-  return a + b;
-}
-
-function sub(a, b) {
-  return a - b;
-}
-
-function mult(a, b) {
-  return a * b;
-}
-
-function div(a, b) {
-  return a / b;
-}
-
-function mod(a, b) {
-  return a % b;
-}
-
-function exponent(a, b) {
-  return Math.pow(a, b);
 }
 /* END OF STARTER CODE */
 
