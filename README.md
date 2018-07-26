@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Lecture</th>
-    <td>Day 3 Lecture 3: <a href="">CSS Idioms</a></td>
+    <td>Day 3 Lecture 3: <a href="https://go.meet.sh/intro-js-1">CSS Idioms</a></td>
   </tr>
   <tr>
     <th>Description</th>
